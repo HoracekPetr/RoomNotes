@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notes_nav"
+    app:startDestination="@id/notesFragment">
+
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="com.horacek.roomtodo.presentation.screens.notes_screen.NotesFragment"
+        android:label="fragment_notes"
+        tools:layout="@layout/fragment_notes" >
+        <action
+            android:id="@+id/action_notesFragment_to_insertNotesFragment"
+            app:destination="@id/insertNotesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/insertNotesFragment"
+        android:name="com.horacek.roomtodo.presentation.screens.insert_note_screen.InsertNotesFragment"
+        android:label="fragment_insert_notes"
+        tools:layout="@layout/fragment_insert_notes" >
+        <action
+            android:id="@+id/action_insertNotesFragment_to_notesFragment"
+            app:destination="@id/notesFragment"
+            app:popUpTo="@id/notesFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <argument
+            android:name="noteId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+</navigation>

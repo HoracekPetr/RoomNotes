@@ -29,26 +29,13 @@ class InsertNotesViewModel(
 
     init {
         val id = InsertNotesFragmentArgs.fromSavedStateHandle(savedStateHandle).noteId
-
-        if (id > 0) {
-            _insertNoteModeState.update {
-                InsertNotesMode.UPDATE
-            }
-
-            loadOneItem(id)
-
-        } else {
-            _insertNoteModeState.update {
-                InsertNotesMode.INSERT
-            }
-        }
+        println("ID is $id")
     }
 
     private fun loadOneItem(itemId: Int) {
         viewModelScope.launch {
             val note = loadOneItemUseCase(itemId)
             _noteState.update { note }
-            println("New noteState ${_noteState.value}")
         }
     }
 
@@ -58,7 +45,6 @@ class InsertNotesViewModel(
                 title = title
             )
         }
-        println(_noteState.value)
     }
 
     fun setContentText(content: String) {
@@ -75,7 +61,6 @@ class InsertNotesViewModel(
                 color = color
             )
         }
-        println(_noteState.value)
     }
 
     fun addNote() {

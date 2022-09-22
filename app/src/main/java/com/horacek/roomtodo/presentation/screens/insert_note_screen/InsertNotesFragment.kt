@@ -20,17 +20,16 @@ import com.horacek.roomtodo.R
 import com.horacek.roomtodo.databinding.ActivityMainBinding.inflate
 import com.horacek.roomtodo.databinding.FragmentInsertNotesBinding
 import com.horacek.roomtodo.presentation.screens.insert_note_screen.model.InsertNotesMode
-import com.horacek.roomtodo.util.extensions.sharedArgumentsStateViewModel
 import com.horacek.roomtodo.util.extensions.toEditable
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class InsertNotesFragment : Fragment() {
 
-    private val viewModel by sharedArgumentsStateViewModel<InsertNotesViewModel>()
-
+    private val viewModel by sharedStateViewModel<InsertNotesViewModel>()
     private var _binding: FragmentInsertNotesBinding? = null
     private val binding get() = _binding!!
 

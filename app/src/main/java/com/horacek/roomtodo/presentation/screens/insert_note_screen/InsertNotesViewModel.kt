@@ -29,7 +29,11 @@ class InsertNotesViewModel(
 
     init {
         val id = InsertNotesFragmentArgs.fromSavedStateHandle(savedStateHandle).noteId
-        println("ID is $id")
+        println("Init VM")
+        println("ID $id")
+        if(id > 0){
+            loadOneItem(id)
+        }
     }
 
     private fun loadOneItem(itemId: Int) {

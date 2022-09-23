@@ -12,6 +12,7 @@ import com.horacek.roomtodo.R
 import com.horacek.roomtodo.databinding.FragmentNoteSheetBinding
 import com.horacek.roomtodo.presentation.screens.insert_note_screen.adapters.NoteBackgroundAdapter
 import com.horacek.roomtodo.presentation.screens.insert_note_screen.util.NoteSheetUtil
+import com.horacek.roomtodo.util.extensions.sharedArgumentsStateViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
@@ -19,7 +20,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NoteSheetFragment : BottomSheetDialogFragment() {
 
-    private val viewModel by sharedStateViewModel<InsertNotesViewModel>()
+    private val viewModel by sharedArgumentsStateViewModel<InsertNotesViewModel>(
+        owner = { requireParentFragment() }
+    )
 
     private var _binding: FragmentNoteSheetBinding? = null
     private val binding get() = _binding!!

@@ -16,7 +16,6 @@ import org.koin.core.parameter.ParametersDefinition
 import org.koin.core.qualifier.Qualifier
 
 
-/*
 fun Fragment.argumentsToBundleDefinition(): BundleDefinition = {
     if (arguments != null)
         arguments!!
@@ -36,4 +35,4 @@ inline fun <reified T : ViewModel> Fragment.sharedArgumentsStateViewModel(
     return viewModels(ownerProducer = owner) {
         getViewModelFactory<T>(owner(), qualifier, parameters, state = state, scope = scope)
     }
-}*/
+}

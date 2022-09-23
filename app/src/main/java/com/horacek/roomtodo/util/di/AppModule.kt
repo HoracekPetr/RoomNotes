@@ -6,9 +6,7 @@ import com.horacek.roomtodo.data.local.NotesDatabase
 import com.horacek.roomtodo.data.local.dao.NotesDao
 import com.horacek.roomtodo.data.local.repository.NotesRepository
 import com.horacek.roomtodo.data.local.repository.NotesRepositoryImpl
-import com.horacek.roomtodo.domain.GetAllNotesUseCase
-import com.horacek.roomtodo.domain.InsertNoteUseCase
-import com.horacek.roomtodo.domain.LoadOneItemUseCase
+import com.horacek.roomtodo.domain.*
 import com.horacek.roomtodo.presentation.screens.insert_note_screen.InsertNotesViewModel
 import com.horacek.roomtodo.presentation.screens.notes_screen.NotesScreenViewModel
 import dagger.Module
@@ -47,13 +45,20 @@ val appModule = module {
         LoadOneItemUseCase(get())
     }
 
+    single{
+        UpdateNoteUseCase(get())
+    }
+
+    single {
+        DeleteNoteUseCase(get())
+    }
+
     viewModel{
         NotesScreenViewModel(get())
     }
 
-
     viewModel{
-        InsertNotesViewModel(get(), get(), get())
+        InsertNotesViewModel(get(), get(), get(), get(), get())
     }
 
 }

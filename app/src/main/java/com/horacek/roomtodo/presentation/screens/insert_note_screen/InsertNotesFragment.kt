@@ -58,14 +58,27 @@ class InsertNotesFragment : Fragment() {
             NoteSheetFragment().show(childFragmentManager, "NoteSheet")
         }
 
-        binding.ibDone.background = when(viewModel.insertNoteModeState.value){
-            InsertNotesMode.INSERT -> ResourcesCompat.getDrawable(resources, R.drawable.ic_plus, null)
-            InsertNotesMode.UPDATE -> ResourcesCompat.getDrawable(resources, R.drawable.ic_done, null)
+        binding.ibDone.setOnClickListener {
+            when(viewModel.insertNoteModeState.value){
+                InsertNotesMode.INSERT -> viewModel.addNote()
+                InsertNotesMode.UPDATE -> viewModel.updateOneItem()
+            }
+
+            val action = InsertNotesFragmentDirections.actionInsertNotesFragmentToNotesFragment()
+            findNavController().navigate(directions = action)
         }
 
-        binding.ibDone.setOnClickListener {
-            viewModel.addNote()
+        when(viewModel.insertNoteModeState.value){
+            InsertNotesMode.INSERT -> {
+                binding.ibDelete.visibility = View.GONE
+            }
+            InsertNotesMode.UPDATE -> {
+                binding.ibDelete.visibility = View.VISIBLE
+            }
+        }
 
+        binding.ibDelete.setOnClickListener {
+            viewModel.deleteOneItem()
             val action = InsertNotesFragmentDirections.actionInsertNotesFragmentToNotesFragment()
             findNavController().navigate(directions = action)
         }

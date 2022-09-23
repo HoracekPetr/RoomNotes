@@ -18,4 +18,12 @@ class NotesRepositoryImpl(
     override suspend fun loadOneItem(itemId: Int): NoteDto {
         return dao.loadOneItem(itemId = itemId)
     }
+
+    override suspend fun updateOneItem(noteDto: NoteDto) {
+        dao.updateOneItem(noteDto = noteDto)
+    }
+
+    override suspend fun deleteOneItem(noteDto: NoteDto) {
+        dao.deleteOneItem(noteDto = noteDto)
+    }
 }

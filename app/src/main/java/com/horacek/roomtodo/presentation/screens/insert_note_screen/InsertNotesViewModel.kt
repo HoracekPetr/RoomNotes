@@ -4,8 +4,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.horacek.roomtodo.data.local.model.Note
+import com.horacek.roomtodo.domain.DeleteNoteUseCase
 import com.horacek.roomtodo.domain.InsertNoteUseCase
 import com.horacek.roomtodo.domain.LoadOneItemUseCase
+import com.horacek.roomtodo.domain.UpdateNoteUseCase
 import com.horacek.roomtodo.presentation.screens.insert_note_screen.model.InsertNotesMode
 import com.horacek.roomtodo.util.extensions.getCurrentDateTime
 import com.horacek.roomtodo.util.extensions.toString
@@ -18,6 +20,8 @@ import java.util.*
 class InsertNotesViewModel(
     private val insertNoteUseCase: InsertNoteUseCase,
     private val loadOneItemUseCase: LoadOneItemUseCase,
+    private val updateNoteUseCase: UpdateNoteUseCase,
+    private val deleteNoteUseCase: DeleteNoteUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -29,10 +33,19 @@ class InsertNotesViewModel(
 
     init {
         val id = InsertNotesFragmentArgs.fromSavedStateHandle(savedStateHandle).noteId
-        println("Init VM")
-        println("ID $id")
-        if(id > 0){
-            loadOneItem(id)
+
+        when {
+            id > 0 -> {
+                _insertNoteModeState.update {
+                    InsertNotesMode.UPDATE
+                }
+                loadOneItem(id)
+            }
+            else -> {
+                _insertNoteModeState.update {
+                    InsertNotesMode.INSERT
+                }
+            }
         }
     }
 
@@ -40,6 +53,18 @@ class InsertNotesViewModel(
         viewModelScope.launch {
             val note = loadOneItemUseCase(itemId)
             _noteState.update { note }
+        }
+    }
+
+    fun updateOneItem() {
+        viewModelScope.launch {
+            updateNoteUseCase(_noteState.value)
+        }
+    }
+
+    fun deleteOneItem(){
+        viewModelScope.launch {
+            deleteNoteUseCase(_noteState.value)
         }
     }
 

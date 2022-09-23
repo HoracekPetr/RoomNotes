@@ -9,13 +9,26 @@
     tools:context=".presentation.screens.insert_note_screen.InsertNotesFragment">
 
     <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/ib_delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_delete"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/ib_bg_change"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/ib_bg_change"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@color/transparent"
         android:src="@drawable/ic_style"
         android:clickable="true"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toStartOf="@+id/ib_done"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="true" />
@@ -25,6 +38,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@color/transparent"
+        android:src="@drawable/ic_done"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

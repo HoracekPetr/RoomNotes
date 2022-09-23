@@ -33,5 +33,15 @@ data class Note(
     val content: String? = "",
     val date: String? = "",
     val color: Int? = Color.parseColor("#ffffff")
-)
+) {
+    fun toNoteDto(): NoteDto {
+        return NoteDto(
+            id = id,
+            title = title,
+            content = content,
+            date = date,
+            color = color ?: Color.parseColor("#ffffff")
+        )
+    }
+}
 

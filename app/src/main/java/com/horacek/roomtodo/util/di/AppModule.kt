@@ -53,8 +53,12 @@ val appModule = module {
         DeleteNoteUseCase(get())
     }
 
+    single{
+        SearchNotesUseCase(get())
+    }
+
     viewModel{
-        NotesScreenViewModel(get())
+        NotesScreenViewModel(get(), get())
     }
 
     viewModel{

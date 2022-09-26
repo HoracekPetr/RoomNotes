@@ -9,4 +9,5 @@ interface NotesRepository {
     suspend fun loadOneItem(itemId: Int): NoteDto
     suspend fun updateOneItem(noteDto: NoteDto)
     suspend fun deleteOneItem(noteDto: NoteDto)
+    suspend fun searchNotes(searchQuery: String): Flow<List<NoteDto>>
 }

@@ -23,4 +23,7 @@ interface NotesDao {
     @Delete
     suspend fun deleteOneItem(noteDto: NoteDto)
 
+    @Query("SELECT * FROM notes WHERE title LIKE :searchQuery")
+    fun searchNotes(searchQuery: String): Flow<List<NoteDto>>
+
 }

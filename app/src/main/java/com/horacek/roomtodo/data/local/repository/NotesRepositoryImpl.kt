@@ -26,4 +26,8 @@ class NotesRepositoryImpl(
     override suspend fun deleteOneItem(noteDto: NoteDto) {
         dao.deleteOneItem(noteDto = noteDto)
     }
+
+    override suspend fun searchNotes(searchQuery: String): Flow<List<NoteDto>> {
+        return dao.searchNotes(searchQuery = searchQuery)
+    }
 }

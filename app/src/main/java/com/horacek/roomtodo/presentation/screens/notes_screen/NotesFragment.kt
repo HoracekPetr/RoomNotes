@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -46,20 +47,42 @@ class NotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.notes.collect { notes ->
                     setupNotesRecyclerView(notes)
                 }
             }
         }
+
+        binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { text ->
+
+                    viewModel.searchNotes(text)
+
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                            viewModel.notes.collect { notes ->
+                                setupNotesRecyclerView(notes)
+                            }
+                        }
+                    }
+                }
+                return false
+            }
+        })
     }
 
-    private fun navigateToInsertNoteScreen(){
+    private fun navigateToInsertNoteScreen() {
         val action = NotesFragmentDirections.actionNotesFragmentToInsertNotesFragment()
         findNavController().navigate(action)
     }
 
-    private fun setupNotesRecyclerView(notes: List<Note>){
+    private fun setupNotesRecyclerView(notes: List<Note>) {
 
         notesAdapter = NotesAdapter(notes)
 

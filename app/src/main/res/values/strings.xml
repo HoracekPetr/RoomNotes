@@ -3,7 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="placeholder">Placeholder</string>
-    <string name="whats_on_your_mind">What\'s on your mind ...</string>
+    <string name="whats_on_your_mind">What\'s on your mind …</string>
     <string name="placeholder_date">2.10.2022</string>
     <string name="placeholder_content">Toto je popisek tohoto příspěvku bla bla bla bla bla bla a</string>
+    <string name="add">Add</string>
+    <string name="search">Search for a note …</string>
 </resources>

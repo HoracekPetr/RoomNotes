@@ -17,7 +17,7 @@ interface NotesDao {
     @Query("SELECT * FROM notes WHERE id = (:itemId)")
     suspend fun loadOneItem(itemId: Int): NoteDto
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateOneItem(noteDto: NoteDto)
 
     @Delete

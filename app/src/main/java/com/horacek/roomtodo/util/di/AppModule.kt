@@ -21,7 +21,7 @@ val appModule = module {
             androidContext(),
             NotesDatabase::class.java,
             "notes-db"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     single {

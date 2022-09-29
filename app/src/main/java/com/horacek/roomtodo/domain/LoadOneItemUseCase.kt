@@ -6,5 +6,7 @@ import com.horacek.roomtodo.data.local.repository.NotesRepository
 class LoadOneItemUseCase(
     private val repository: NotesRepository
 ) {
-    suspend operator fun invoke(itemId: Int): Note = repository.loadOneItem(itemId = itemId).toNote()
+    suspend operator fun invoke(itemId: Int): Note {
+        return repository.loadOneItem(itemId = itemId).toNote()
+    }
 }

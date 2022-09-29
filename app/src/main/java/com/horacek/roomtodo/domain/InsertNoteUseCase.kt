@@ -14,7 +14,8 @@ class InsertNoteUseCase(
                 title = note.title,
                 content = note.content,
                 date = note.date,
-                color = note.color ?: Color.parseColor("#ffffff")
+                color = note.color ?: Color.parseColor("#ffffff"),
+                uriString = note.uriString ?: ""
             )
         )
     }

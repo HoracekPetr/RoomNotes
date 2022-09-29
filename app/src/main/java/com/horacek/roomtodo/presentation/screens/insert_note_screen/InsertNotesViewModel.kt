@@ -68,17 +68,10 @@ class InsertNotesViewModel(
         }
     }
 
-    fun setTitleText(title: String) {
+    fun setTitleAndContentText(title: String, content: String){
         _noteState.update { note ->
             note.copy(
-                title = title
-            )
-        }
-    }
-
-    fun setContentText(content: String) {
-        _noteState.update { note ->
-            note.copy(
+                title = title,
                 content = content
             )
         }
@@ -88,6 +81,14 @@ class InsertNotesViewModel(
         _noteState.update { note ->
             note.copy(
                 color = color
+            )
+        }
+    }
+
+    fun setNoteImageUri(uriString: String?){
+        _noteState.update { note ->
+            note.copy(
+                uriString = uriString
             )
         }
     }

@@ -1,6 +1,7 @@
 package com.horacek.roomtodo.data.local.model
 
 import android.graphics.Color
+import android.net.Uri
 import androidx.core.content.ContextCompat
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,7 +15,8 @@ data class NoteDto(
     val title: String? = null,
     val content: String? = null,
     val date: String? = null,
-    val color: Int = Color.parseColor("#ffffff")
+    val color: Int = Color.parseColor("#ffffff"),
+    val uriString: String
 ){
     fun toNote(): Note{
         return Note(
@@ -22,7 +24,8 @@ data class NoteDto(
             title = this.title,
             content = this.content,
             date = this.date,
-            color = this.color
+            color = this.color,
+            uriString = this.uriString
         )
     }
 }
@@ -32,7 +35,8 @@ data class Note(
     val title: String? = "",
     val content: String? = "",
     val date: String? = "",
-    val color: Int? = Color.parseColor("#ffffff")
+    val color: Int? = Color.parseColor("#ffffff"),
+    val uriString: String? = null
 ) {
     fun toNoteDto(): NoteDto {
         return NoteDto(
@@ -40,7 +44,8 @@ data class Note(
             title = title,
             content = content,
             date = date,
-            color = color ?: Color.parseColor("#ffffff")
+            color = color ?: Color.parseColor("#ffffff"),
+            uriString = uriString ?: ""
         )
     }
 }
